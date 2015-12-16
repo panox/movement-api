@@ -19,3 +19,7 @@ function getActivities(req, res) {
 function checkForActivities(req, res) {
 
 }
+
+module.exports = {
+  getActivities: getActivities
+};
