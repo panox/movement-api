@@ -13,7 +13,7 @@ var userSchema = new mongoose.Schema({
     accessToken: {type: String},
     refreshToken: {type: String},
     userId: {type: String},
-    activities: [Activity.schema]
+    activities: Array
   }
 });
 
