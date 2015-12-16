@@ -12,10 +12,11 @@ var userSchema = new mongoose.Schema({
     accessToken: {type: String},
     refreshToken: {type: String},
     userId: {type: String},
-    activities: [{
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Activity'
-    }]
+    data: []
+    // activities: [{
+    //   type: mongoose.Schema.Types.ObjectId,
+    //   ref: 'Activity'
+    // }]
   }
 });
 

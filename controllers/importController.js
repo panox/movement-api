@@ -110,20 +110,25 @@ function saveSummary(data, userEmail) {
     for (var i = 0; i < data.length; i++) {
       for (var item in data[i]) {
         console.log(data[i]);
-        var newDate = changeDate(data[i].date);
-        var newActivity = new Activity({
-          date: newDate,
-          type: data[i].summary[0].activity,
-          steps: data[i].summary[0].steps
+        user.local.data.push(data[i]);
+        user.save(function(err, user) {
+          if (err) {throw new Error('User could not be saved');}
+          return;
         });
-        newActivity.save(function(err, activity) {
-          if (err) {throw new Error('Article could not be saved.');}
-          user.local.activities.push(newActivity);
-          user.save(function(err, user) {
-            if (err) {throw new Error('User could not be saved');}
-            return;
-          });
-        });
+        // var newDate = changeDate(data[i].date);
+        // var newActivity = new Activity({
+        //   date: newDate,
+        //   type: data[i].summary[0].activity,
+        //   steps: data[i].summary[0].steps
+        // });
+        // newActivity.save(function(err, activity) {
+        //   if (err) {throw new Error('Article could not be saved.');}
+        //   user.local.activities.push(newActivity);
+        //   user.save(function(err, user) {
+        //     if (err) {throw new Error('User could not be saved');}
+        //     return;
+        //   });
+        // });
       }
     }
   });
