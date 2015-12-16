@@ -1,5 +1,5 @@
 {
   "client_id": "0PczKa3wpSio4j_R1Ulm0wgY21UdK9GH",
   "client_secret": "xLGj6T1Vrg6eU33HzySNIM2Da_L_QL8f5U2i8XEEZRWxzO7ETfTmfTZFHr9zwEL1",
-  "redirect_uri": "http://localhost:3000/auth"
+  "redirect_uri": "http://movement-api.herokuapp.com/auth"
 }

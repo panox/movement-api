@@ -59,10 +59,10 @@ function getSummary(req, res) {
   self.accessToken = '';
   User.findOne({'local.email': self.userEmail}, function(err, user) {
     if (err) {
-      return done(err, false, {message: 'Something went wrong.'});
+      throw new Error('Something went wrong.');
     }
     if (!user) {
-      return done(err, false, {message: 'No user found.'});
+      throw new Error('No user found.');
     }
     if (user) {
       self.accessToken = user.local.accessToken;
