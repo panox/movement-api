@@ -9,13 +9,16 @@ var querystring = require('querystring');
 var moment = require('moment');
 var url = require('url');
 
-var moves = new MovesApi({
+
+var movesCredentials = {
   clientId: process.env.MOVES_CLIENT,
   clientSecret: process.env.MOVES_SECRET,
   redirectUri: process.env.MOVES_REDIRECT
-});
+}
 
-// var movesToken = {};
+console.log(movesCredentials);
+
+var moves = new MovesApi(movesCredentials);
 
 function handleRequest(req, res) {
   var authCode = req.body.code;
