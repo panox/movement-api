@@ -95,6 +95,8 @@ function getRequest(call, userEmail, accessToken, callback) {
   });
 }
 
+// TODO changeDate function not working correctly
+
 function changeDate(oldDate) {
   var date = oldDate.split('');
   var year = date[0] + date[1] + date[2] + date[3];
