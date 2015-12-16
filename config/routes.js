@@ -20,6 +20,9 @@ router.route('/moves/summary')
 router.route('/activities')
   .post(dashboardController.getActivities);
 
+router.route('/steps')
+  .post(dashboardController.countSteps);
+
 router.route('/users')
   .get(usersController.usersIndex);
 
