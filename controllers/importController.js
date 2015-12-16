@@ -116,10 +116,12 @@ function saveSummary(data, userEmail) {
         //   activity: []
         // });
         for (var index = 0; index < data[i].summary.length; index++) {
-          console.log(index);
-          // user.local.days.activity.push({
-          //
-          // });
+          for (var item in data[i]) {
+            console.log(item);
+            // user.local.days.activity.push({
+            //
+            // });
+          }
         }
       }
     }
