@@ -16,8 +16,8 @@ router.route('/moves/auth')
 router.route('/moves/summary')
   .post(importController.getSummary);
 
-router.route('/activities')
-  .get(importController.getActivities);
+// router.route('/activities')
+//   .get(importController.getActivities);
 
 router.route('/users')
   .get(usersController.usersIndex);
