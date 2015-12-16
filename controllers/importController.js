@@ -108,18 +108,19 @@ function saveSummary(data, userEmail) {
   User.findOne({'local.email': userEmail}, function(err, user) {
     if (err) {throw new Error('User not found.');}
     for (var i = 0; i < data.length; i++) {
-      console.log(data[i]);
-      var newDate = changeDate(data[i].date);
-      user.local.days.push({
-        date: newDate,
-        activity: []
-      });
-      for (var index = 0; index < data[i].summary.length; index++) {
-        console.log(index);
-
-        // user.local.days.activity.push({
-        //
+      for (var item in data[i]) {
+        console.log(data[i]);
+        var newDate = changeDate(data[i].date);
+        // user.local.days.push({
+        //   date: newDate,
+        //   activity: []
         // });
+        for (var index = 0; index < data[i].summary.length; index++) {
+          console.log(index);
+          // user.local.days.activity.push({
+          //
+          // });
+        }
       }
     }
     user.save(function(err, user) {
