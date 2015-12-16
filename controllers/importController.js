@@ -105,28 +105,27 @@ function changeDate(data) {
 }
 
 function saveSummary(data, userEmail) {
-  console.log(userEmail);
-  for (var i = 0; i < data.length; i++) {
-    for (var item in data[i]) {
-      var newDate = changeDate(data[i].date);
-      var newActivity = {};
-      newActivity.date = newDate;
-      newActivity.type = data[i].summary[0].activity;
-      newActivity.steps = data[i].summary[0].steps;
-      User.findOne({'local.email': userEmail}, function(err, user) {
-        if(err) return res.render({messsage: 'Could not ceate home because ' + err});
-        user.local.home = {
-          date: newActivity.date,
-          type: newActivity.type,
-          steps: newActivity.steps
-        };
-        user.save(function(err){
-          if(err) return res.status(500).json({message: 'Could not add activities to user because ' + err});
-          return res.status(200).json({ activities: user.local.activities });
+  User.findOne({'local.email': userEmail}, function(err, user) {
+    if (err) {throw new Error('User not found.');}
+    for (var i = 0; i < data.length; i++) {
+      for (var item in data[i]) {
+        var newDate = changeDate(data[i].date);
+        var newActivity = new Activity({
+          date: newDate,
+          type: data[i].summary[0].activity,
+          steps: data[i].summary[0].steps
         });
-      });
+        newActivity.save(function(err, activity) {
+          if (err) {throw new Error('Article could not be saved.');}
+          user.local.activities.push(newActivity);
+          user.save(function(err, user) {
+            if (err) {throw new Error('User could not be saved');}
+            return;
+          });
+        });
+      }
     }
-  }
+  });
 }
 
 function getActivities() {
