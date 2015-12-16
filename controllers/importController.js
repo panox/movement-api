@@ -126,16 +126,7 @@ function saveSummary(data, userEmail) {
       }
     }
   });
-}
-
-function getActivities() {
-
-}
-
-// TODO Check if user has activities before displaying the data on the front-end
-
-function checkForActivities(userEmail) {
-
+  return;
 }
 
 module.exports = {
