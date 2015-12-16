@@ -116,7 +116,7 @@ function saveSummary(data, userEmail) {
         //   activity: []
         // });
         for (var index = 0; index < data[i].summary.length; index++) {
-          for (var item in data[i]) {
+          for (var item in summary[index]) {
             console.log('SUMMARY ITEM', item);
             // user.local.days.activity.push({
             //
@@ -125,10 +125,10 @@ function saveSummary(data, userEmail) {
         }
       }
     }
-    user.save(function(err, user) {
-      if (err) {throw new Error('User could not be saved');}
-      return;
-    });
+    // user.save(function(err, user) {
+    //   if (err) {throw new Error('User could not be saved');}
+    //   return;
+    // });
   });
   return;
 }
