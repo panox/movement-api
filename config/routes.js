@@ -4,7 +4,7 @@ var passport = require('passport');
 
 var usersController = require('../controllers/usersController');
 var importController = require('../controllers/importController');
-var importController = require('../controllers/dashboardController');
+var dashboardController = require('../controllers/dashboardController');
 var authenticationController
   = require('../controllers/authenticationController');
 
@@ -18,7 +18,7 @@ router.route('/moves/summary')
   .post(importController.getSummary);
 
 router.route('/activities')
-  .get(dashboardController.getActivities);
+  .post(dashboardController.getActivities);
 
 router.route('/users')
   .get(usersController.usersIndex);
