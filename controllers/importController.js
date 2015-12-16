@@ -105,32 +105,29 @@ function changeDate(data) {
 }
 
 function saveSummary(data, userEmail) {
-  User.findOne({'local.email': userEmail}, function(err, user) {
-    if (err) {throw new Error('User not found.');}
-    for (var i = 0; i < data.length; i++) {
-      for (var item in data[i]) {
-        console.log('MAIN ITEM', data[i]);
-        var newDate = changeDate(data[i].date);
-        // user.local.days.push({
-        //   date: newDate,
-        //   activity: []
-        // });
-        for (var index = 0; index < data[i].summary.length; index++) {
-          for (var item in summary[index]) {
-            console.log('SUMMARY ITEM', item);
-            // user.local.days.activity.push({
-            //
-            // });
-          }
-        }
+  var activityArr = [];
+  data.forEach(function(item) {
+    item.summary.forEach(function(summaryObj) {
+      if(summaryObj.activity === 'walking') {
+        activityArr.push({
+          activityType: summaryObj.activity,
+          steps: summaryObj.steps,
+          date: changeDate(item.date)
+        });
       }
-    }
-    // user.save(function(err, user) {
-    //   if (err) {throw new Error('User could not be saved');}
-    //   return;
-    // });
+    });
   });
-  return;
+
+  console.log("activityArr", activityArr);
+  // User.findOne({'local.email': userEmail}, function(err, user) {
+  //   if (err) {throw new Error('User not found.');}
+  //   user.activites = activityArr;
+  //   user.save(function(err, user) {
+  //     if (err) {throw new Error('User could not be saved');}
+  //     return;
+  //   });
+  // });
+  // return;
 }
 
 module.exports = {
