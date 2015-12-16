@@ -105,23 +105,22 @@ function changeDate(oldDate) {
 }
 
 function saveSummary(data, userEmail) {
-  var activityArr = [];
-  data.forEach(function(item) {
-    item.summary.forEach(function(summaryObj) {
-      if (summaryObj.activity === 'walking') {
-        activityArr.push({
-          activityType: summaryObj.activity,
-          steps: summaryObj.steps,
-          date: changeDate(item.date)
-        });
-      }
-    });
-  });
+
   User.findOne({'local.email': userEmail}, function(err, user) {
     console.log(user);
     if (err) {throw new Error('User not found.');}
-    user.local.activites = activityArr;
-    console.log(activityArr);
+    data.forEach(function(item) {
+      item.summary.forEach(function(summaryObj) {
+        if (summaryObj.activity === 'walking') {
+          user.local.activities.push({
+            activityType: summaryObj.activity,
+            steps: summaryObj.steps,
+            date: changeDate(item.date)
+          });
+        }
+      });
+    });
+    console.log(user.local);
     user.save(function(err, user) {
       console.log(user);
       if (err) {throw new Error('User could not be saved');}
