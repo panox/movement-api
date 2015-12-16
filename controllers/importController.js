@@ -109,7 +109,7 @@ function saveSummary(data, userEmail) {
     if (err) {throw new Error('User not found.');}
     for (var i = 0; i < data.length; i++) {
       for (var item in data[i]) {
-        console.log(data[i]);
+        console.log('MAIN ITEM', data[i]);
         var newDate = changeDate(data[i].date);
         // user.local.days.push({
         //   date: newDate,
@@ -117,7 +117,7 @@ function saveSummary(data, userEmail) {
         // });
         for (var index = 0; index < data[i].summary.length; index++) {
           for (var item in data[i]) {
-            console.log(item);
+            console.log('SUMMARY ITEM', item);
             // user.local.days.activity.push({
             //
             // });
