@@ -115,7 +115,7 @@ function saveSummary(data, userEmail) {
           user.local.activities.push({
             activityType: summaryObj.activity,
             steps: summaryObj.steps,
-            date: changeDate(item.date)
+            date: item.date
           });
         }
       });
