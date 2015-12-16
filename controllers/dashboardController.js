@@ -2,7 +2,7 @@ var User = require('../models/user');
 
 
 function getActivities(req, res) {
-  User.findOne(req.body.email).populate('local.activities').exec(function(err, user) {
+  User.findOne(req.body.email, function(err, user) {
     if (err) {
       return res.status(404).json({
         message: 'Something went wrong showing the home' + err
