@@ -5,11 +5,11 @@ function getActivities(req, res) {
   User.findOne(req.body.email, function(err, user) {
     if (err) {
       return res.status(404).json({
-        message: 'Something went wrong showing the home' + err
+        message: 'Something went wrong showing the user' + err
       });
     }
     res.status(200).json({
-      user: user
+      data: user.local
     });
   });
 }
