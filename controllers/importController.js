@@ -109,6 +109,7 @@ function saveSummary(data, userEmail) {
     if (err) {throw new Error('User not found.');}
     for (var i = 0; i < data.length; i++) {
       for (var item in data[i]) {
+        console.log(data[i]);
         var newDate = changeDate(data[i].date);
         var newActivity = new Activity({
           date: newDate,
