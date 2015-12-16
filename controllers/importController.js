@@ -108,29 +108,24 @@ function saveSummary(data, userEmail) {
   User.findOne({'local.email': userEmail}, function(err, user) {
     if (err) {throw new Error('User not found.');}
     for (var i = 0; i < data.length; i++) {
-      for (var item in data[i]) {
-        console.log(data[i]);
-        user.local.data.push(data[i]);
-        user.save(function(err, user) {
-          if (err) {throw new Error('User could not be saved');}
-          return;
-        });
-        // var newDate = changeDate(data[i].date);
-        // var newActivity = new Activity({
-        //   date: newDate,
-        //   type: data[i].summary[0].activity,
-        //   steps: data[i].summary[0].steps
-        // });
-        // newActivity.save(function(err, activity) {
-        //   if (err) {throw new Error('Article could not be saved.');}
-        //   user.local.activities.push(newActivity);
-        //   user.save(function(err, user) {
-        //     if (err) {throw new Error('User could not be saved');}
-        //     return;
-        //   });
+      console.log(data[i]);
+      var newDate = changeDate(data[i].date);
+      user.local.days.push({
+        date: newDate,
+        activity: []
+      });
+      for (var index = 0; index < data[i].summary.length; index++) {
+        console.log(index);
+
+        // user.local.days.activity.push({
+        //
         // });
       }
     }
+    user.save(function(err, user) {
+      if (err) {throw new Error('User could not be saved');}
+      return;
+    });
   });
   return;
 }

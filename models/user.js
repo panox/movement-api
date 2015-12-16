@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var bcrypt   = require('bcrypt-nodejs');
+var Day = require('./day');
 
 var userSchema = new mongoose.Schema({
   local: {
@@ -12,7 +13,7 @@ var userSchema = new mongoose.Schema({
     accessToken: {type: String},
     refreshToken: {type: String},
     userId: {type: String},
-    data: []
+    days: [Day]
     // activities: [{
     //   type: mongoose.Schema.Types.ObjectId,
     //   ref: 'Activity'
