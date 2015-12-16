@@ -120,8 +120,7 @@ function saveSummary(data, userEmail) {
   User.findOne({'local.email': userEmail}, function(err, user) {
     console.log(user);
     if (err) {throw new Error('User not found.');}
-    user.local.activites.push(activityArr);
-    console.log(user.local.activites);
+    user.local.activites = activityArr;
     console.log(activityArr);
     user.save(function(err, user) {
       if (err) {throw new Error('User could not be saved');}
