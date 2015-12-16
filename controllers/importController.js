@@ -117,13 +117,14 @@ function saveSummary(data, userEmail) {
       }
     });
   });
-  console.log('activityArr', activityArr);
   User.findOne({'local.email': userEmail}, function(err, user) {
+    console.log(user);
     if (err) {throw new Error('User not found.');}
     user.local.activites = activityArr;
+    console.log(activityArr);
     user.save(function(err, user) {
       if (err) {throw new Error('User could not be saved');}
-      return;
+      res.status(200).json(user);
     });
   });
   return;
