@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var bcrypt   = require('bcrypt-nodejs');
+var Activity = require('./activity')
 
 var userSchema = new mongoose.Schema({
   local: {
