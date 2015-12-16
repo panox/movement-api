@@ -2,7 +2,7 @@ var User = require('../models/user');
 
 
 function getActivities(req, res) {
-  User.findOne(req.body.email).populate('activities').exec(function(err, user) {
+  User.findOne(req.body.email).populate('activities', 'date type steps').exec(function(err, user) {
     console.log(user.activities)
     if (err) {
       return res.status(404).json({
