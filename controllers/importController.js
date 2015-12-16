@@ -105,10 +105,10 @@ function changeDate(oldDate) {
 }
 
 function saveSummary(data, userEmail) {
-
   User.findOne({'local.email': userEmail}, function(err, user) {
-    console.log(user);
-    if (err) {throw new Error('User not found.');}
+    if (err) {
+      throw new Error('User not found.');
+    }
     data.forEach(function(item) {
       item.summary.forEach(function(summaryObj) {
         if (summaryObj.activity === 'walking') {
@@ -120,14 +120,13 @@ function saveSummary(data, userEmail) {
         }
       });
     });
-    console.log(user.local);
     user.save(function(err, user) {
-      console.log(user);
-      if (err) {throw new Error('User could not be saved');}
+      if (err) {
+        throw new Error('User could not be saved');
+      }
       res.status(200).json(user);
     });
   });
-  return;
 }
 
 module.exports = {
