@@ -110,6 +110,7 @@ function saveSummary(data, userEmail) {
       throw new Error('User not found.');
     }
     data.forEach(function(item) {
+      console.log(item);
       item.summary.forEach(function(summaryObj) {
         if (summaryObj.activity === 'walking') {
           user.local.activities.push({
