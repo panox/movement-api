@@ -9,14 +9,11 @@ var querystring = require('querystring');
 var moment = require('moment');
 var url = require('url');
 
-
 var movesCredentials = {
   clientId: process.env.MOVES_CLIENT,
   clientSecret: process.env.MOVES_SECRET,
   redirectUri: process.env.MOVES_REDIRECT
-}
-
-console.log(movesCredentials);
+};
 
 var moves = new MovesApi(movesCredentials);
 
@@ -70,7 +67,7 @@ function getSummary(req, res) {
     if (user) {
       self.accessToken = user.local.accessToken;
       getRequest('/user/summary/daily?pastDays=31&scope=activity',
-      self.accessToken, function(err, res) {
+      self.userEmail, self.accessToken, function(err, res) {
         if (err) {
           throw new Error('Something went wrong');
         }
@@ -80,7 +77,7 @@ function getSummary(req, res) {
   });
 }
 
-function getRequest(call, accessToken, callback) {
+function getRequest(call, userEmail, accessToken, callback) {
   var apiBase = 'https://api.moves-app.com/api/1.1';
   if (!call) {
     throw new Error('Call is required. Please refer to the Moves docs.');
@@ -94,7 +91,7 @@ function getRequest(call, accessToken, callback) {
     if (err) {
       throw new Error('Something went wrong.');
     }
-    saveSummary(res.body);
+    saveSummary(res.body, userEmail);
   });
 }
 
@@ -107,36 +104,39 @@ function changeDate(data) {
   return newDate;
 }
 
-function saveSummary(data) {
+function saveSummary(data, userEmail) {
+  console.log(userEmail);
   for (var i = 0; i < data.length; i++) {
     for (var item in data[i]) {
       var newDate = changeDate(data[i].date);
-      var newActivity = new Activity();
+      var newActivity = {};
       newActivity.date = newDate;
       newActivity.type = data[i].summary[0].activity;
       newActivity.steps = data[i].summary[0].steps;
-      newActivity.save(function(err, activity) {
-        if (err) {
-          return done(err, false, {message: 'Something went wrong.'});
-        }
-        return done(null, activity);
+      User.findOne({'local.email': userEmail}, function(err, user) {
+        if(err) return res.render({messsage: 'Could not ceate home because ' + err});
+        user.local.home = {
+          date: newActivity.date,
+          type: newActivity.type,
+          steps: newActivity.steps
+        };
+        user.save(function(err){
+          if(err) return res.status(500).json({message: 'Could not add activities to user because ' + err});
+          return res.status(200).json({ activities: user.local.activities });
+        });
       });
-
-      // TODO Get user email, find user and push activity into user model
-
-      // User.findOne({'local.email': userEmail}, function(err, user) {
-      //   if (err) {
-      //     return done(err, false, {message: 'Something went wrong.'});
-      //   }
-      //   if (!user) {
-      //     return done(err, false, {message: 'No user found.'});
-      //   }
-      //   if (user) {
-      //     user.local.activities.push(newActivity);
-      //   }
-      // });
     }
   }
+}
+
+function getActivities() {
+
+}
+
+// TODO Check if user has activities before displaying the data on the front-end
+
+function checkForActivities(userEmail) {
+
 }
 
 module.exports = {
