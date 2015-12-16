@@ -95,8 +95,8 @@ function getRequest(call, userEmail, accessToken, callback) {
   });
 }
 
-function changeDate(data) {
-  var date = data.split('');
+function changeDate(oldDate) {
+  var date = oldDate.split('');
   var year = date[0] + date[1] + date[2] + date[3];
   var month = date[4] + date[5];
   var day = date[6] + date[7];
@@ -108,7 +108,7 @@ function saveSummary(data, userEmail) {
   var activityArr = [];
   data.forEach(function(item) {
     item.summary.forEach(function(summaryObj) {
-      if(summaryObj.activity === 'walking') {
+      if (summaryObj.activity === 'walking') {
         activityArr.push({
           activityType: summaryObj.activity,
           steps: summaryObj.steps,
@@ -117,17 +117,16 @@ function saveSummary(data, userEmail) {
       }
     });
   });
-
-  console.log("activityArr", activityArr);
-  // User.findOne({'local.email': userEmail}, function(err, user) {
-  //   if (err) {throw new Error('User not found.');}
-  //   user.activites = activityArr;
-  //   user.save(function(err, user) {
-  //     if (err) {throw new Error('User could not be saved');}
-  //     return;
-  //   });
-  // });
-  // return;
+  console.log('activityArr', activityArr);
+  User.findOne({'local.email': userEmail}, function(err, user) {
+    if (err) {throw new Error('User not found.');}
+    user.local.activites = activityArr;
+    user.save(function(err, user) {
+      if (err) {throw new Error('User could not be saved');}
+      return;
+    });
+  });
+  return;
 }
 
 module.exports = {
