@@ -123,6 +123,7 @@ function saveSummary(data, userEmail) {
     user.local.activites = activityArr;
     console.log(activityArr);
     user.save(function(err, user) {
+      console.log(user);
       if (err) {throw new Error('User could not be saved');}
       res.status(200).json(user);
     });
