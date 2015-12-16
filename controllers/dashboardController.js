@@ -9,7 +9,7 @@ function getActivities(req, res) {
       });
     }
     res.status(200).json({
-      activities: user.local.activities[0]
+      activities: user.local.activities
     });
   });
 }
