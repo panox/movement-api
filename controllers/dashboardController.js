@@ -1,5 +1,5 @@
 var User = require('../models/user');
-
+var mongoose = require('mongoose');
 
 function getActivities(req, res) {
   User.findOne(req.body.email, function(err, user) {
@@ -15,7 +15,7 @@ function getActivities(req, res) {
 }
 
 function countSteps(userEmail) {
-  db.User.aggregate([
+  mongoose.User.aggregate([
     { $match: {
         email: userEmail
     }},
