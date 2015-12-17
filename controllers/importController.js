@@ -100,7 +100,7 @@ function getRequest(call, userEmail, accessToken, callback) {
 function changeDate(oldDate) {
   var date = oldDate.split('');
   var year = date[0] + date[1] + date[2] + date[3];
-  var month = date[4] + date[5];
+  var month = (date[4] + date[5]) - 1;
   var day = date[6] + date[7];
   var newDate = new Date(year, month, day);
   return newDate;
@@ -118,7 +118,7 @@ function saveSummary(data, userEmail) {
           user.local.activities.push({
             activityType: summaryObj.activity,
             steps: summaryObj.steps,
-            date: item.date
+            date: changeDate(item.date)
           });
         }
       });
