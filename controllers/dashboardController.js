@@ -8,7 +8,8 @@ function getActivities(req, res) {
         message: 'Something went wrong showing the user' + err
       });
     }
-    console.log(req.body.email);
+    console.log(user);
+    console.log(user.local.activites);
     res.status(200).json({
       activities: user.local.activities
     });
