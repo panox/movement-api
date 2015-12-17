@@ -110,18 +110,12 @@ function changeDate(oldDate) {
 }
 
 function saveSummary(data, userEmail) {
-  // var lastDay = '';
   User.findOne({'local.email': userEmail}, function(err, user) {
     if (err) {
       throw new Error('User not found.');
     }
-    // filter out last import day
-    // user.local.activities = user.local.activities.filter(function(activityObj) {
-    //   return activityObj.date < user.lastImportDay;
-    // });
     data.forEach(function(item) {
       item.summary.forEach(function(summaryObj) {
-        // add all new data including last import day (for if statement below: && summaryObj.date >= user.lastImportDay)
         if (summaryObj.activity === 'walking') {
           user.local.activities.push({
             activityType: summaryObj.activity,
@@ -129,10 +123,8 @@ function saveSummary(data, userEmail) {
             date: changeDate(item.date)
           });
         }
-        // lastDay = item.date;
       });
     });
-    // user.lastImportDay = lastDay;
     user.save(function(err, user) {
       if (err) {
         throw new Error('User could not be saved');
