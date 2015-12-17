@@ -102,8 +102,11 @@ function changeDate(oldDate) {
   var year = date[0] + date[1] + date[2] + date[3];
   var month = (date[4] + date[5]) - 1;
   var day = date[6] + date[7];
-  var newDate = new Date(year, month, day);
-  return newDate;
+  var jsDate = new Date(year, month, day);
+  var formatDate = (jsDate.toDateString()).split(' ');
+  var formattedDate = formatDate[0] + ', ' + formatDate[2] + ' ' +
+    formatDate[1];
+  return formattedDate;
 }
 
 function saveSummary(data, userEmail) {
