@@ -121,14 +121,14 @@ function saveSummary(data, userEmail) {
     // });
     data.forEach(function(item) {
       item.summary.forEach(function(summaryObj) {
-        // add all new data including last import day
-        // if (summaryObj.activity === 'walking' && summaryObj.date >= user.lastImportDay) {
+        // add all new data including last import day (for if statement below: && summaryObj.date >= user.lastImportDay)
+        if (summaryObj.activity === 'walking') {
           user.local.activities.push({
             activityType: summaryObj.activity,
             steps: summaryObj.steps,
             date: changeDate(item.date)
           });
-        // }
+        }
         // lastDay = item.date;
       });
     });
