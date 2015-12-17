@@ -13,7 +13,8 @@ var userSchema = new mongoose.Schema({
     accessToken: {type: String},
     refreshToken: {type: String},
     userId: {type: String},
-    activities: Array
+    activities: Array,
+    lastImportDay: String
   }
 });
 
