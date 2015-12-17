@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 
 function getActivities(req, res) {
   console.log(req.body.email);
-  User.findOne({email: req.body.email}, function(err, user) {
+  User.findOne({'local.email': req.body.email}, function(err, user) {
     if (err) {
       return res.status(404).json({
         message: 'Something went wrong showing the user' + err
@@ -11,9 +11,9 @@ function getActivities(req, res) {
     }
     console.log(user);
     res.status(200)
-    // .json({
-    //   activities: user.local.activities
-    // });
+    .json({
+      activities: user.local.activities
+    });
   });
 }
 
