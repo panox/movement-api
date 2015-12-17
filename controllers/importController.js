@@ -110,6 +110,7 @@ function changeDate(oldDate) {
 }
 
 function saveSummary(data, userEmail) {
+  var lastDay = '';
   User.findOne({'local.email': userEmail}, function(err, user) {
     if (err) {
       throw new Error('User not found.');
@@ -128,7 +129,7 @@ function saveSummary(data, userEmail) {
             date: changeDate(item.date)
           });
         }
-        var lastDay = item.date;
+        lastDay = item.date;
       });
     });
     user.lastImportDay = lastDay;
