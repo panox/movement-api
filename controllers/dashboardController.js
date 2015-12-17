@@ -10,7 +10,6 @@ function getActivities(req, res) {
       });
     }
     console.log(user);
-    console.log(user.local.activities);
     res.status(200).json({
       activities: user.local.activities
     });
