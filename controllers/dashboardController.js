@@ -2,6 +2,7 @@ var User = require('../models/user');
 var mongoose = require('mongoose');
 
 function getActivities(req, res) {
+  console.log(req.body.email);
   User.findOne(req.body.email, function(err, user) {
     if (err) {
       return res.status(404).json({
