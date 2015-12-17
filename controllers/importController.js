@@ -128,7 +128,7 @@ function saveSummary(data, userEmail) {
             date: changeDate(item.date)
           });
         }
-        lastImportDay = item.date;
+        var lastDay = item.date;
       });
     });
     user.lastImportDay = lastDay;
