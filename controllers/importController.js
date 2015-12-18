@@ -19,7 +19,9 @@ var moves = new MovesApi(movesCredentials);
 
 function handleRequest(req, res) {
   var authCode = req.body.code;
+  console.log(authCode);
   userEmail = req.body.email;
+  console.log(userEmail);
   if (authCode) {
     moves.getAccessToken(authCode, function(err, authData) {
       if (err) {
@@ -42,6 +44,7 @@ function handleRequest(req, res) {
               return done(err, false, {message: 'Something went wrong.'});
             }
             return done(null, user);
+            console.log(user);
           });
         }
       });
