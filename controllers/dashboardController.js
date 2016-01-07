@@ -40,6 +40,12 @@ function checkForActivities(req, res) {
 
 }
 
+// TODO Display places visited on a map
+
+function displayPlaces(req, res) {
+  
+}
+
 module.exports = {
   getActivities: getActivities,
   countSteps: countSteps
